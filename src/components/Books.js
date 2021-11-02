@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import store from '../redux/configureStore';
 import BookCard from './BookCard';
 
@@ -15,7 +16,7 @@ const Books = () => {
     } = book;
     return (
       <BookCard
-        key={Math.random()}
+        key={uuidv4()}
         completed={completed}
         title={title}
         author={author}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import CategoryOptions from './CategoryOptions';
 
 const AddBookForm = () => {
@@ -12,7 +13,7 @@ const AddBookForm = () => {
 
     const categoryOptions = bookCategories.map((category) => {
       const { value, content } = category;
-      return (<CategoryOptions key={Math.random} value={value} content={content} />);
+      return (<CategoryOptions key={uuidv4()} value={value} content={content} />);
     });
 
     return categoryOptions;
