@@ -5,29 +5,7 @@ const REMOVE_BOOK = 'bookstore/book/REMOVE_BOOK';
 const EDIT_BOOK = 'bookstore/book/EDIT_BOOK';
 const UPDATE_PROGRESS = 'bookstore/book/UPDATE_PROGRESS';
 
-const initialState = {
-  books: [
-    {
-      title: 'Hunger Games',
-      author: 'Suzanne Collins',
-      category: 'Sci-Fi',
-      completed: '0%',
-    },
-    {
-      title: 'Charlie and the Chocolate Factory',
-      author: 'Roald Dahl',
-      category: 'Fun',
-      completed: '0%',
-    },
-    {
-      title: 'To kill a mockingbird',
-      author: 'Harper Lee',
-      category: 'Adventure',
-      completed: '0%',
-    },
-  ],
-  category: [],
-};
+const initialState = [];
 
 // Define reducer
 export default function reducer(state = initialState, action = {}) {
@@ -37,16 +15,16 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD_BOOKS:
       return books;
     case ADD_BOOK:
-      localStorage.setItem(JSON.stringify({ ...state, book }));
-      return { ...state, book };
+      localStorage.setItem('books', JSON.stringify([...state, book]));
+      return [...state, book];
     case EDIT_BOOK:
-      return ([...state].map((book) => (action.id === book.id)) ? action.book : book);
+      return (state.map((book) => (action.id === book.id)) ? action.book : book);
     case REMOVE_BOOK:
-      return ([...state].filter((book) => action.id !== book.id));
+      return (state.filter((book) => action.id !== book.id));
     case UPDATE_PROGRESS:
-      return ([...state].map((book) => (action.id === book.id)) ? action.book : book);
+      return (state.map((book) => (action.id === book.id)) ? action.book : book);
     case ADD_COMMENT:
-      return ([...state].map((book) => (action.id === book.id)) ? action.book : book);
+      return (state.map((book) => (action.id === book.id)) ? action.book : book);
     default: return state;
   }
 }
