@@ -40,6 +40,14 @@ const AddBookForm = () => {
   const { title, author, category } = book;
   const dispatch = useDispatch();
 
+  const submitToStore = () => {
+    const newBook = {
+      ...book,
+      id: uuidv4(),
+    };
+    dispatch(addBook(newBook));
+  };
+
   return (
     <div>
       <h1>Add New Book</h1>
@@ -52,13 +60,7 @@ const AddBookForm = () => {
         <button
           type="button"
           className="add-book-btn"
-          onClick={() => {
-            const newBook = {
-              ...book,
-              id: uuidv4(),
-            };
-            dispatch(addBook(newBook));
-          }}
+          onClick={submitToStore}
         >
           ADD BOOK
         </button>
