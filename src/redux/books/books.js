@@ -18,13 +18,13 @@ export default function reducer(state = initialState, action = {}) {
       localStorage.setItem('books', JSON.stringify([...state, book]));
       return [...state, book];
     case EDIT_BOOK:
-      return ([...state].map((book) => (action.id === book.id)) ? action.book : book);
+      return (state.map((book) => (action.id === book.id)) ? action.book : book);
     case REMOVE_BOOK:
-      return ([...state].filter((book) => action.id !== book.id));
+      return (state.filter((book) => action.id !== book.id));
     case UPDATE_PROGRESS:
-      return ([...state].map((book) => (action.id === book.id)) ? action.book : book);
+      return (state.map((book) => (action.id === book.id)) ? action.book : book);
     case ADD_COMMENT:
-      return ([...state].map((book) => (action.id === book.id)) ? action.book : book);
+      return (state.map((book) => (action.id === book.id)) ? action.book : book);
     default: return state;
   }
 }
