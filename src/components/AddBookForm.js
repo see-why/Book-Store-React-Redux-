@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from 'react-redux';
-import { addBook } from '../redux/books/books';
+import { sendToServer } from '../redux/books/books';
 import CategoryOptions from './CategoryOptions';
 
 const AddBookForm = () => {
   const [book, setBook] = useState({
     title: '',
-    author: '',
     category: 'Fun',
-    completed: '0%',
-    id: '',
   });
 
   const Options = () => {
@@ -37,28 +34,29 @@ const AddBookForm = () => {
     }));
   };
 
-  const { title, author, category } = book;
+  const { title, category } = book;
   const dispatch = useDispatch();
 
   const submitToStore = () => {
-    const newBook = {
-      ...book,
-      id: uuidv4(),
-    };
-    dispatch(addBook(newBook));
+    if (title) {
+      const newBook = {
+        ...book,
+        item_id: uuidv4(),
+      };
+      dispatch(sendToServer(newBook));
+    }
   };
 
   return (
     <div>
       <h1>Add New Book</h1>
       <form>
-        <input name="title" type="text" placeholder="Book title" value={title} onChange={hangleChange} className="book-title" />
-        <input name="author" type="text" placeholder="Author" value={author} onChange={hangleChange} className="book-author" />
+        <input name="title" required type="text" placeholder="Book title" value={title} onChange={hangleChange} className="book-title" />
         <select name="category" value={category} onChange={hangleChange} id="books">
           {Options()}
         </select>
         <button
-          type="button"
+          type="submit"
           className="add-book-btn"
           onClick={submitToStore}
         >
