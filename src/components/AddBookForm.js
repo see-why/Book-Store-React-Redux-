@@ -38,11 +38,13 @@ const AddBookForm = () => {
   const dispatch = useDispatch();
 
   const submitToStore = () => {
-    const newBook = {
-      ...book,
-      item_id: uuidv4(),
-    };
-    dispatch(sendToServer(newBook));
+    if (title) {
+      const newBook = {
+        ...book,
+        item_id: uuidv4(),
+      };
+      dispatch(sendToServer(newBook));
+    }
   };
 
   return (
@@ -54,7 +56,7 @@ const AddBookForm = () => {
           {Options()}
         </select>
         <button
-          type="button"
+          type="submit"
           className="add-book-btn"
           onClick={submitToStore}
         >
