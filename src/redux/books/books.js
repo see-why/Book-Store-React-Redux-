@@ -1,30 +1,26 @@
-const LOAD_BOOKS = 'bookstore/book/LOAD_BOOKS';
+const LOAD_BOOKS = 'bookstore/book/GET_BOOKS';
 const ADD_BOOK = 'bookstore/book/ADD_BOOK';
-const ADD_COMMENT = 'bookstore/book/ADD_COMMENT';
 const REMOVE_BOOK = 'bookstore/book/REMOVE_BOOK';
-const EDIT_BOOK = 'bookstore/book/EDIT_BOOK';
-const UPDATE_PROGRESS = 'bookstore/book/UPDATE_PROGRESS';
 
 const initialState = [];
 
 // Define reducer
 export default function reducer(state = initialState, action = {}) {
-  const { book } = action;
-  const books = JSON.parse(localStorage.getItem('books'));
+  const { id, book, books } = action;
   switch (action.type) {
-    case LOAD_BOOKS:
-      return books;
     case ADD_BOOK:
       localStorage.setItem('books', JSON.stringify([...state, book]));
       return [...state, book];
-    case EDIT_BOOK:
-      return (state.map((book) => (action.id === book.id)) ? action.book : book);
     case REMOVE_BOOK:
-      return (state.filter((book) => action.id !== book.id));
-    case UPDATE_PROGRESS:
-      return (state.map((book) => (action.id === book.id)) ? action.book : book);
-    case ADD_COMMENT:
-      return (state.map((book) => (action.id === book.id)) ? action.book : book);
+      return (state.filter((book) => id !== book.id));
+    case LOAD_BOOKS:
+      return [
+        ...Object.entries(books).map((item) => ({
+          id: item[0],
+          title: item[1][0].title,
+          category: item[1][0].category,
+        })),
+      ];
     default: return state;
   }
 }
@@ -33,22 +29,48 @@ export default function reducer(state = initialState, action = {}) {
 export function addBook(book) {
   return { type: ADD_BOOK, book };
 }
-export function loadBooks() {
-  return { type: LOAD_BOOKS };
-}
 
-export function addComment(id, book) {
-  return { type: ADD_COMMENT, id, book };
-}
-
-export function editBook(id, book) {
-  return { type: EDIT_BOOK, id, book };
-}
-
-export function updateProgress(id, book) {
-  return { type: UPDATE_PROGRESS, id, book };
+export function loadBooks(books) {
+  return { type: LOAD_BOOKS, books };
 }
 
 export function removeBook(id) {
   return { type: REMOVE_BOOK, id };
 }
+
+export const getFromServer = () => async (dispatch) => {
+  const url = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi';
+  const books = await fetch(`${url}/apps/9XgdVr2aEGpR10zG2I7F/books/`);
+  const result = await books.json();
+  dispatch(loadBooks(result));
+};
+
+export const sendToServer = (data) => (dispatch) => {
+  const url = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi';
+  fetch(`${url}/apps/9XgdVr2aEGpR10zG2I7F/books/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.text())
+    .then(() => {
+      dispatch(getFromServer());
+    });
+};
+
+export const removeFromServer = (id) => (dispatch) => {
+  const url = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi';
+  fetch(`${url}/apps/9XgdVr2aEGpR10zG2I7F/books/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ item_id: id }),
+  })
+    .then((response) => response.text())
+    .then(() => {
+      dispatch(getFromServer());
+    });
+};
