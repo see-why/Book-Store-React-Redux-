@@ -1,0 +1,21 @@
+@media only screen and (max-width: 992px) {
+  .book-Card {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .circle_box,
+  .chapter-info {
+    padding: 0;
+  }
+
+  .vertical-Line {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1115px) {
+  .book-info {
+    width: 32%;
+  }
+}

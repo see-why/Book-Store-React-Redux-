@@ -23,8 +23,9 @@ const Books = () => {
   });
 
   const Books = books.map((book) => {
+    const arrayOfInfo = book.title.split('+');
+    const [title, author, chapter, completed] = arrayOfInfo;
     const {
-      title,
       category,
       id,
     } = book;
@@ -33,7 +34,10 @@ const Books = () => {
         key={uuidv4()}
         id={id}
         title={title}
+        author={author}
+        chapter={chapter}
         category={category}
+        completed={completed}
       />
     );
   });
