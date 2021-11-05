@@ -5,6 +5,11 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import store from './redux/configureStore';
 import App from './App';
 import './App.css';
+import './styles/circle.css';
+import './styles/app-mobile.css';
+import './styles/progress-bar.css';
+import './styles/chapter-progress.css';
+import './styles/form.css';
 
 ReactDOM.render(
   <React.StrictMode>
