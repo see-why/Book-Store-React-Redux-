@@ -6,7 +6,7 @@ const Navbar = () => {
     {
       id: 1,
       path: '/',
-      text: 'Home',
+      text: 'Books',
     },
     {
       id: 2,
@@ -17,10 +17,13 @@ const Navbar = () => {
 
   return (
     <nav className="navBar">
-      <h1>BookStore CMS</h1>
-      <ul className="menuNav">
-        {links.map((link) => <li key={link.id}><NavLink to={link.path} activeClassName="active-link" key={link.id} exact>{link.text}</NavLink></li>)}
-      </ul>
+      <div className="links-Container">
+        <h1>BookStore CMS</h1>
+        <ul className="menuNav">
+          {links.map((link) => <li key={link.id}><NavLink to={link.path} activeClassName="active-link" key={link.id} exact>{link.text}</NavLink></li>)}
+        </ul>
+      </div>
+      <div className="avatar-container"><i className="fas fa-user" /></div>
     </nav>
   );
 };
