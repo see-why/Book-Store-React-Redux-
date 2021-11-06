@@ -11,7 +11,7 @@ A web application that manages a library of Books.
 
 ## Live Demo
 
-- [Live Demo Link]( https://see-why.github.io/Book-Store-React-Redux-/)
+- [Live Demo Link]( https://book-store-react-redux.netlify.app/)
 
 ## Getting Started
 
