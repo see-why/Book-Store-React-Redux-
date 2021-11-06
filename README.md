@@ -1,11 +1,17 @@
 # Book-Store-React-Redux-
 A web application that manages a library of Books.
 
+![screenshot](/ScreenShot.PNG)
+
 ## Built With
 
 - React
 - JSX
 - Redux
+
+## Live Demo
+
+- [Live Demo Link]( https://see-why.github.io/Book-Store-React-Redux-/)
 
 ## Getting Started
 
@@ -60,7 +66,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 👤 **Cyril Iyadi**
 
 - GitHub: [@see-why](https://github.com/see-why)
-- LinkedIn: [C.Iyadi](https://www.linkedin.com/in/cyril-iyadi-83517270/)
+- LinkedIn: [C.Iyadi](https://www.linkedin.com/in/cyril-iyadi/)
 
 ## 🤝 Contributing
 
