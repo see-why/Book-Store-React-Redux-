@@ -10,6 +10,7 @@ import './styles/app-mobile.css';
 import './styles/progress-bar.css';
 import './styles/chapter-progress.css';
 import './styles/form.css';
+import '../ScreenShot.PNG';
 
 ReactDOM.render(
   <React.StrictMode>
